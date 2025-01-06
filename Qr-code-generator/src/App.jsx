@@ -1,52 +1,27 @@
-import React, { useState } from 'react'
-import styled from 'styled-components';
+import React, { useState, useRef, useEffect } from 'react'
+import { Input } from '@headlessui/react'
+import validator from 'validator';
 
 const App = () => {
-  const [inputVal, setInputVal] = useState("")
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setInputVal()
-    console.log()
+  const [url, setUrl] = useState("ben")
+  
+  const handleSubmit = () => {
+    if(validator.isURL(url))
+    {
+      console.log(`The URL ${url} you entered is a fine url`)
+    }
+    else
+    console.log(`The URL ${url} you entered isn't a fine url`)
   }
-  const Container = styled.div
-  `
-  width: 90vw;
-  height: 90vh;
-  padding-block: 30px;
-  padding-inline: 50px;
-  background-color: #3b3b3b;
-  border-radius: 10px;
-  `
-  const Text = styled.h1
-  `
-    color: white;
-    font-size: 4rem;
-    font-weight: 800;
-  `
-  const Input = styled.input
-  `
-    width: 45%;
-    border-radius: 10px;
-    padding-block: 20px;
-    padding-inline: 20px;
-    background-color: #1c1c1c;
-    border: none;
-    font-size: 1.5rem;
 
-
-  `
-  const Submit = styled.button
-  `
-    
-  `
   return (
-    <Container>
-      <Text>
+    <div style={{width: "90vw", height: "90vh", paddingBlock: "30px", paddingInline: "50px", backgroundColor: "#3b3b3b", borderRadius: "10px"}}>
+      <h1 style={{ color: "white", fontSize: "4rem", fontWeight: "800"}}>
         Please enter the URL below!
-      </Text>
-      <Input type='text'></Input>
-      <Submit onClick={() => handleSubmit(e)}>Submit</Submit>
-    </Container>
+      </h1>
+      <Input style={{width: "45%", borderRadius: "10px", paddingBlock: "20px", paddingInline: "20px", backgroundColor: "#1c1c1c", border: "none", fontSize: "1.5rem"}} type='text' onChange={e => setUrl(e.target.value)}></Input>
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
   )
 }
 
